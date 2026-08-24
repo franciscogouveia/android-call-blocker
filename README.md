@@ -1,4 +1,4 @@
-# Contact Call Blocker
+# Non-Contact Call Blocker
 
 A deliberately small, offline Android app for a personal Pixel. Once selected for Android's call-screening role, it blocks every incoming call that Android sends to its `CallScreeningService`. It does not replace Google Phone as the dialer, change Do Not Disturb, use networking, or collect data.
 
@@ -27,16 +27,16 @@ Without signing configuration, the release output is `app/build/outputs/apk/rele
 Create a key once and keep it and its passwords backed up privately:
 
 ```bash
-keytool -genkeypair -v -keystore contact-call-blocker.jks \
-  -alias contact-call-blocker -keyalg RSA -keysize 2048 -validity 10000
+keytool -genkeypair -v -keystore call-blocker.jks \
+  -alias call-blocker -keyalg RSA -keysize 2048 -validity 10000
 ```
 
 Create an untracked `keystore.properties` in the repository root:
 
 ```properties
-storeFile=/absolute/path/to/contact-call-blocker.jks
+storeFile=/absolute/path/to/call-blocker.jks
 storePassword=your-store-password
-keyAlias=contact-call-blocker
+keyAlias=call-blocker
 keyPassword=your-key-password
 ```
 
@@ -50,7 +50,7 @@ Enable USB debugging, connect the Pixel, and run:
 adb install app/build/outputs/apk/release/app-release.apk
 ```
 
-Open Contact Call Blocker and tap **Enable call screening**, then approve the system role dialog. You can also verify the selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
+Open Non-Contact Call Blocker and tap **Enable call screening**, then approve the system role dialog. You can also verify the selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
 
 For an update, keep the same application ID and version-signing key, increment `versionCode`, rebuild, and run:
 
@@ -58,7 +58,7 @@ For an update, keep the same application ID and version-signing key, increment `
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-In **Settings > Apps > Contact Call Blocker > Permissions**, verify that no permissions are allowed or requested. The service's manifest `BIND_SCREENING_SERVICE` attribute is a system binding restriction, not a permission granted to this app.
+In **Settings > Apps > Non-Contact Call Blocker > Permissions**, verify that no permissions are allowed or requested. The service's manifest `BIND_SCREENING_SERVICE` attribute is a system binding restriction, not a permission granted to this app.
 
 ## Privacy audit
 

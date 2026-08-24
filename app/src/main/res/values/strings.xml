@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Contact Call Blocker</string>
+    <string name="app_name">Non-Contact Call Blocker</string>
     <string name="explanation">Calls from numbers not in your contacts are blocked before your phone rings.</string>
     <string name="status_active">Status: Active</string>
     <string name="status_not_active">Status: Not active</string>

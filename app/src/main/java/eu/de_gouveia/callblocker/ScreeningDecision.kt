@@ -1,4 +1,4 @@
-package eu.de_gouveia.contactcallblocker
+package eu.de_gouveia.callblocker
 
 internal enum class CallDirection {
     INCOMING,

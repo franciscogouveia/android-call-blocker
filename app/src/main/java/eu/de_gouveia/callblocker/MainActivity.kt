@@ -1,4 +1,4 @@
-package eu.de_gouveia.contactcallblocker
+package eu.de_gouveia.callblocker
 
 import android.app.Activity
 import android.app.role.RoleManager

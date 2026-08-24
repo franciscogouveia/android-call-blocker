@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Contact Call Blocker"
+rootProject.name = "Call Blocker"
 include(":app")

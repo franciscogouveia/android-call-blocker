@@ -13,11 +13,11 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-    namespace = "eu.de_gouveia.contactcallblocker"
+    namespace = "eu.de_gouveia.callblocker"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "eu.de_gouveia.contactcallblocker"
+        applicationId = "eu.de_gouveia.callblocker"
         minSdk = 29
         targetSdk = 36
         versionCode = 1

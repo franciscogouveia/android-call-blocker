@@ -1,9 +1,9 @@
-package eu.de_gouveia.contactcallblocker
+package eu.de_gouveia.callblocker
 
 import android.telecom.Call
 import android.telecom.CallScreeningService
 
-class ContactCallScreeningService : CallScreeningService() {
+class NonContactCallScreeningService : CallScreeningService() {
     override fun onScreenCall(callDetails: Call.Details) {
         val direction = when (callDetails.callDirection) {
             Call.Details.DIRECTION_INCOMING -> CallDirection.INCOMING

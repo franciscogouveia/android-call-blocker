@@ -1,4 +1,4 @@
-package eu.de_gouveia.contactcallblocker
+package eu.de_gouveia.callblocker
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

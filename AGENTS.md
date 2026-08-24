@@ -9,7 +9,7 @@ This is a single-module Android application. Keep code and resources in the stan
 - `app/src/test/` for JVM unit tests.
 - `app/src/androidTest/` for device and emulator tests.
 
-The call-screening service, activity, and pure decision logic live under `app/src/main/java/eu/de_gouveia/contactcallblocker/`. Do not commit generated directories such as `.gradle/`, `build/`, or `app/build/`.
+The call-screening service, activity, and pure decision logic live under `app/src/main/java/eu/de_gouveia/callblocker/`. Do not commit generated directories such as `.gradle/`, `build/`, or `app/build/`.
 
 ## Build, Test, and Development Commands
 
