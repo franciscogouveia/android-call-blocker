@@ -1,6 +1,10 @@
 # Non-Contact Call Blocker
 
-A deliberately small, offline Android app for a personal Pixel. Once selected for Android's call-screening role, it can block every incoming call that Android sends to its `CallScreeningService` and notify you of the blocked number. A switch in the app enables or disables blocking without changing the system role. It does not replace Google Phone as the dialer, change Do Not Disturb, use networking, or collect data.
+A deliberately small, offline Android app that blocks visible non-contact calls using Android's native call-screening API. Once selected for Android's call-screening role, it can block every incoming call that Android sends to its `CallScreeningService` and notify you of the blocked number. A switch in the app enables or disables blocking without changing the system role. It does not replace the system dialer, change Do Not Disturb, use networking, or collect data.
+
+## Compatibility
+
+The app uses standard Android APIs and supports Android 10 and later (API 29+); it is not Pixel-specific. It was developed for a Pixel 7, but behavior has not been physically verified on devices from other manufacturers. Call-screening role availability and telecom behavior can vary with the device maker and system dialer.
 
 ## How contact filtering works
 
