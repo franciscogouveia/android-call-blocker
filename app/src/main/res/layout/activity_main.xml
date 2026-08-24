@@ -53,6 +53,12 @@
         android:text="@string/notifications_disabled"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/notification_controls_explanation" />
+
     <Button
         android:id="@+id/request_notifications"
         android:layout_width="wrap_content"

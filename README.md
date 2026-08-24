@@ -50,7 +50,7 @@ Enable USB debugging, connect the Pixel, and run:
 adb install app/build/outputs/apk/release/app-release.apk
 ```
 
-Open Non-Contact Call Blocker, tap **Enable call screening**, and approve the system role dialog. Then tap **Enable notifications** and grant Android's notification permission to receive a notification containing each blocked number. You can also verify the screening selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
+Open Non-Contact Call Blocker, tap **Enable call screening**, and approve the system role dialog. Then tap **Enable notifications** and grant Android's notification permission to receive a notification containing each blocked number. Once enabled, use **Manage or disable notifications** to open Android's notification settings and turn them off or adjust the blocked-calls channel. You can also verify the screening selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
 
 For an update, keep the same application ID and version-signing key, increment `versionCode`, rebuild, and run:
 

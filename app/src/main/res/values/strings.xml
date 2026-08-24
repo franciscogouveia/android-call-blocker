@@ -9,6 +9,8 @@
     <string name="notifications_enabled">Blocked-call notifications: Enabled</string>
     <string name="notifications_disabled">Blocked-call notifications: Disabled</string>
     <string name="enable_notifications">Enable notifications</string>
+    <string name="manage_notifications">Manage or disable notifications</string>
+    <string name="notification_controls_explanation">Use this button to grant notification access or open Android settings where blocked-call notifications can be turned off.</string>
     <string name="notification_channel_name">Blocked calls</string>
     <string name="notification_channel_description">Notifications for calls blocked because the number is not in Contacts</string>
     <string name="blocked_call_notification_title">Call blocked</string>

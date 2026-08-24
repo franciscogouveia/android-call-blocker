@@ -106,7 +106,9 @@ class MainActivity : Activity() {
         notificationStatusText.setText(
             if (enabled) R.string.notifications_enabled else R.string.notifications_disabled,
         )
-        requestNotificationsButton.visibility = if (enabled) View.GONE else View.VISIBLE
+        requestNotificationsButton.setText(
+            if (enabled) R.string.manage_notifications else R.string.enable_notifications,
+        )
     }
 
     private companion object {
