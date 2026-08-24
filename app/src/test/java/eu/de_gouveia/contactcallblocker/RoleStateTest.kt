@@ -1,4 +1,4 @@
-package com.example.contactcallblocker
+package eu.de_gouveia.contactcallblocker
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

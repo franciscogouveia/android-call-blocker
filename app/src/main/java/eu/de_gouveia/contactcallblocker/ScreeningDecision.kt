@@ -1,4 +1,4 @@
-package com.example.contactcallblocker
+package eu.de_gouveia.contactcallblocker
 
 internal enum class CallDirection {
     INCOMING,
