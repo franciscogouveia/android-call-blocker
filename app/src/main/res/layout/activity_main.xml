@@ -30,12 +30,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
+        android:id="@+id/role_warning"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/status_not_active"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/call_screening_access_required"
         android:textStyle="bold" />
 
     <Button
@@ -43,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/enable_call_screening" />
+        android:text="@string/grant_call_screening_access" />
 
     <TextView
         android:id="@+id/notification_status"
