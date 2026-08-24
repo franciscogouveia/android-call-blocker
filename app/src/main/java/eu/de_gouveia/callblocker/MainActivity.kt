@@ -16,18 +16,19 @@ import android.widget.TextView
 
 class MainActivity : Activity() {
     private lateinit var roleManager: RoleManager
-    private lateinit var statusText: TextView
+    private lateinit var roleWarningText: TextView
     private lateinit var requestRoleButton: Button
     private lateinit var notificationStatusText: TextView
     private lateinit var requestNotificationsButton: Button
     private lateinit var blockingSwitch: Switch
+    private var isUpdatingBlockingSwitch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         roleManager = getSystemService(RoleManager::class.java)
-        statusText = findViewById(R.id.status)
+        roleWarningText = findViewById(R.id.role_warning)
         requestRoleButton = findViewById(R.id.request_role)
         notificationStatusText = findViewById(R.id.notification_status)
         requestNotificationsButton = findViewById(R.id.request_notifications)
@@ -35,15 +36,14 @@ class MainActivity : Activity() {
         requestRoleButton.setOnClickListener { requestCallScreeningRole() }
         requestNotificationsButton.setOnClickListener { requestNotificationAccess() }
         blockingSwitch.setOnCheckedChangeListener { _, enabled ->
-            BlockingPreference.setEnabled(this, enabled)
+            if (!isUpdatingBlockingSwitch) BlockingPreference.setEnabled(this, enabled)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        updateRoleStatus()
+        updateScreeningAccess()
         updateNotificationStatus()
-        blockingSwitch.isChecked = BlockingPreference.isEnabled(this)
     }
 
     @Suppress("DEPRECATION")
@@ -58,21 +58,27 @@ class MainActivity : Activity() {
     @Deprecated("The platform role request API still uses activity results on API 29")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ROLE_REQUEST_CODE) updateRoleStatus()
+        if (requestCode == ROLE_REQUEST_CODE) updateScreeningAccess()
     }
 
-    private fun updateRoleStatus() {
+    private fun updateScreeningAccess() {
         val available = roleManager.isRoleAvailable(RoleManager.ROLE_CALL_SCREENING)
         val state = roleState(
             isRoleAvailable = available,
             isRoleHeld = available && roleManager.isRoleHeld(RoleManager.ROLE_CALL_SCREENING),
         )
-        statusText.setText(
-            if (state == RoleState.ACTIVE) R.string.status_active else R.string.status_not_active,
-        )
-        requestRoleButton.visibility = if (state == RoleState.ACTIVE) View.GONE else View.VISIBLE
+        val active = state == RoleState.ACTIVE
+        roleWarningText.visibility = if (active) View.GONE else View.VISIBLE
+        requestRoleButton.visibility = if (active) View.GONE else View.VISIBLE
         requestRoleButton.isEnabled = available
-        if (!available) requestRoleButton.setText(R.string.role_unavailable)
+        requestRoleButton.setText(
+            if (available) R.string.grant_call_screening_access else R.string.role_unavailable,
+        )
+
+        isUpdatingBlockingSwitch = true
+        blockingSwitch.isEnabled = active
+        blockingSwitch.isChecked = active && BlockingPreference.isEnabled(this)
+        isUpdatingBlockingSwitch = false
     }
 
     private fun requestNotificationAccess() {

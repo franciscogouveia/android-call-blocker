@@ -2,9 +2,8 @@
     <string name="app_name">Non-Contact Call Blocker</string>
     <string name="explanation">When blocking is enabled, calls from numbers not in your contacts are blocked before your phone rings.</string>
     <string name="blocking_switch_label">Block calls from non-contacts</string>
-    <string name="status_active">Status: Active</string>
-    <string name="status_not_active">Status: Not active</string>
-    <string name="enable_call_screening">Enable call screening</string>
+    <string name="call_screening_access_required">Android call-screening access is required before blocking can work.</string>
+    <string name="grant_call_screening_access">Grant call-screening access</string>
     <string name="role_unavailable">Call screening unavailable</string>
     <string name="notifications_enabled">Blocked-call notifications: Enabled</string>
     <string name="notifications_disabled">Blocked-call notifications: Disabled</string>
