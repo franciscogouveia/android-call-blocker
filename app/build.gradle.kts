@@ -20,8 +20,8 @@ android {
         applicationId = "eu.de_gouveia.callblocker"
         minSdk = 29
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner = "android.test.InstrumentationTestRunner"
     }
