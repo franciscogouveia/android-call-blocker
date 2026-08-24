@@ -4,6 +4,8 @@ Are you annoyed by unsolicited random numbers calling you? Time to fight back th
 
 A deliberately small, offline Android app that blocks visible non-contact calls using Android's native call-screening API. Once selected for Android's call-screening role, it can block every incoming call that Android sends to its `CallScreeningService` and notify you of the blocked number. A switch in the app enables or disables blocking without changing the system role. It does not replace the system dialer, change Do Not Disturb, use networking, or collect data.
 
+> **Note:** This GitHub repository is a mirror of the project's private GitLab repository.
+
 ## How contact filtering works
 
 The app intentionally does **not** request `READ_CONTACTS`. Android Telecom only sends telephone calls that are not in Contacts to a call-screening service without that permission. When blocking is enabled, the app immediately disallows every incoming call delivered by Android without marking it as manually rejected. When disabled, it immediately allows the call. Carrier and system configuration ultimately determine voicemail behavior.
