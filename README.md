@@ -13,6 +13,8 @@ Android does not deliver calls whose caller-ID presentation is restricted, unkno
 ## Tested devices
 
 - Google Pixel 7
+- Samsung Galaxy S21 FE
+- Samsung Galaxy A34
 
 ## Build and test
 
