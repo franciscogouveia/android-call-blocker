@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.Button
+import android.widget.Switch
 import android.widget.TextView
 
 class MainActivity : Activity() {
@@ -19,6 +20,7 @@ class MainActivity : Activity() {
     private lateinit var requestRoleButton: Button
     private lateinit var notificationStatusText: TextView
     private lateinit var requestNotificationsButton: Button
+    private lateinit var blockingSwitch: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +31,19 @@ class MainActivity : Activity() {
         requestRoleButton = findViewById(R.id.request_role)
         notificationStatusText = findViewById(R.id.notification_status)
         requestNotificationsButton = findViewById(R.id.request_notifications)
+        blockingSwitch = findViewById(R.id.blocking_switch)
         requestRoleButton.setOnClickListener { requestCallScreeningRole() }
         requestNotificationsButton.setOnClickListener { requestNotificationAccess() }
+        blockingSwitch.setOnCheckedChangeListener { _, enabled ->
+            BlockingPreference.setEnabled(this, enabled)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         updateRoleStatus()
         updateNotificationStatus()
+        blockingSwitch.isChecked = BlockingPreference.isEnabled(this)
     }
 
     @Suppress("DEPRECATION")

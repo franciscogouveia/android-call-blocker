@@ -8,8 +8,15 @@ internal enum class CallDirection {
 
 internal enum class ScreeningAction {
     BLOCK,
+    ALLOW,
     IGNORE,
 }
 
-internal fun screeningAction(direction: CallDirection): ScreeningAction =
-    if (direction == CallDirection.INCOMING) ScreeningAction.BLOCK else ScreeningAction.IGNORE
+internal fun screeningAction(
+    direction: CallDirection,
+    isBlockingEnabled: Boolean,
+): ScreeningAction = when {
+    direction != CallDirection.INCOMING -> ScreeningAction.IGNORE
+    isBlockingEnabled -> ScreeningAction.BLOCK
+    else -> ScreeningAction.ALLOW
+}

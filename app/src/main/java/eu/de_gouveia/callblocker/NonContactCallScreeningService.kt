@@ -21,17 +21,20 @@ class NonContactCallScreeningService : CallScreeningService() {
             else -> CallDirection.UNKNOWN
         }
 
-        if (screeningAction(direction) != ScreeningAction.BLOCK) return
+        val action = screeningAction(direction, BlockingPreference.isEnabled(this))
+        if (action == ScreeningAction.IGNORE) return
 
         // Omitting READ_CONTACTS makes Android withhold contact calls from this service.
         // Granting it would change that platform filtering behavior.
         val response = CallScreeningService.CallResponse.Builder()
-            .setDisallowCall(true)
+            .setDisallowCall(action == ScreeningAction.BLOCK)
             .setRejectCall(false)
             .build()
         respondToCall(callDetails, response)
 
-        showBlockedCallNotification(callDetails.handle?.schemeSpecificPart)
+        if (action == ScreeningAction.BLOCK) {
+            showBlockedCallNotification(callDetails.handle?.schemeSpecificPart)
+        }
     }
 
     private fun showBlockedCallNotification(number: String?) {
