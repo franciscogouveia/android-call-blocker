@@ -1,5 +1,7 @@
 # Non-Contact Call Blocker
 
+Are you annoyed by unsolicited random numbers calling you? Time to fight back the spam. With this application, only numbers in your contact list will be able to reach you.
+
 A deliberately small, offline Android app that blocks visible non-contact calls using Android's native call-screening API. Once selected for Android's call-screening role, it can block every incoming call that Android sends to its `CallScreeningService` and notify you of the blocked number. A switch in the app enables or disables blocking without changing the system role. It does not replace the system dialer, change Do Not Disturb, use networking, or collect data.
 
 ## How contact filtering works
