@@ -1,0 +1,67 @@
+image: eclipse-temurin:17-jdk-jammy
+
+variables:
+  ANDROID_HOME: "$CI_PROJECT_DIR/.android-sdk"
+  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+  ANDROID_COMMAND_LINE_TOOLS_VERSION: "15859902"
+  ANDROID_COMMAND_LINE_TOOLS_SHA256: "4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583"
+
+default:
+  cache:
+    key:
+      files:
+        - gradle/wrapper/gradle-wrapper.properties
+        - build.gradle.kts
+    paths:
+      - .gradle/caches/
+      - .gradle/wrapper/
+      - .android-sdk/
+
+verify:
+  stage: test
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y --no-install-recommends curl unzip
+    - |
+      if [ ! -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+        tools_archive="commandlinetools-linux-${ANDROID_COMMAND_LINE_TOOLS_VERSION}_latest.zip"
+        mkdir -p "$ANDROID_HOME/cmdline-tools"
+        curl --fail --location --retry 3 \
+          --output "/tmp/$tools_archive" \
+          "https://dl.google.com/android/repository/$tools_archive"
+        echo "$ANDROID_COMMAND_LINE_TOOLS_SHA256  /tmp/$tools_archive" | sha256sum --check
+        unzip -q "/tmp/$tools_archive" -d /tmp/android-command-line-tools
+        mv /tmp/android-command-line-tools/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest"
+      fi
+    - yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+    - '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" "platform-tools"'
+  script:
+    - ./gradlew --no-daemon test lint assembleRelease
+    - |
+      apk="app/build/outputs/apk/release/app-release-unsigned.apk"
+      permissions="$($ANDROID_HOME/build-tools/36.0.0/aapt2 dump permissions "$apk")"
+      echo "$permissions"
+      for permission in \
+        android.permission.INTERNET \
+        android.permission.READ_CONTACTS \
+        android.permission.WRITE_CONTACTS \
+        android.permission.READ_CALL_LOG \
+        android.permission.WRITE_CALL_LOG \
+        android.permission.READ_SMS \
+        android.permission.RECEIVE_SMS \
+        android.permission.READ_PHONE_STATE; do
+        if echo "$permissions" | grep --fixed-strings --quiet "$permission"; then
+          echo "Forbidden permission found: $permission" >&2
+          exit 1
+        fi
+      done
+  artifacts:
+    when: always
+    expire_in: 14 days
+    reports:
+      junit: app/build/test-results/**/TEST-*.xml
+    paths:
+      - app/build/outputs/apk/release/app-release-unsigned.apk
+      - app/build/reports/lint-results-debug.html
+      - app/build/reports/lint-results-debug.txt
+      - app/build/intermediates/merged_manifests/release/processReleaseManifest/AndroidManifest.xml

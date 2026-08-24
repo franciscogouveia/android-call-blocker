@@ -18,6 +18,8 @@ Install JDK 17 and Android SDK Platform 36, then set `ANDROID_HOME` or create an
 ./gradlew assembleRelease
 ```
 
+GitLab CI runs the same checks for each pushed branch and merge request. It also audits the packaged APK for forbidden permissions and retains the unsigned APK, merged release manifest, lint report, and JUnit results as pipeline artifacts.
+
 Without signing configuration, the release output is `app/build/outputs/apk/release/app-release-unsigned.apk`.
 
 ## Personal release signing
