@@ -1,6 +1,6 @@
 # Non-Contact Call Blocker
 
-A deliberately small, offline Android app for a personal Pixel. Once selected for Android's call-screening role, it blocks every incoming call that Android sends to its `CallScreeningService`. It does not replace Google Phone as the dialer, change Do Not Disturb, use networking, or collect data.
+A deliberately small, offline Android app for a personal Pixel. Once selected for Android's call-screening role, it blocks every incoming call that Android sends to its `CallScreeningService` and can notify you of the blocked number. It does not replace Google Phone as the dialer, change Do Not Disturb, use networking, or collect data.
 
 ## How contact filtering works
 
@@ -50,7 +50,7 @@ Enable USB debugging, connect the Pixel, and run:
 adb install app/build/outputs/apk/release/app-release.apk
 ```
 
-Open Non-Contact Call Blocker and tap **Enable call screening**, then approve the system role dialog. You can also verify the selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
+Open Non-Contact Call Blocker, tap **Enable call screening**, and approve the system role dialog. Then tap **Enable notifications** and grant Android's notification permission to receive a notification containing each blocked number. You can also verify the screening selection under **Settings > Apps > Default apps > Caller ID & spam app** (wording may vary by Android release). Google Phone remains the Phone app.
 
 For an update, keep the same application ID and version-signing key, increment `versionCode`, rebuild, and run:
 
@@ -58,8 +58,8 @@ For an update, keep the same application ID and version-signing key, increment `
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-In **Settings > Apps > Non-Contact Call Blocker > Permissions**, verify that no permissions are allowed or requested. The service's manifest `BIND_SCREENING_SERVICE` attribute is a system binding restriction, not a permission granted to this app.
+In **Settings > Apps > Non-Contact Call Blocker > Permissions**, verify that Notifications is the only requested permission. The service's manifest `BIND_SCREENING_SERVICE` attribute is a system binding restriction, not a permission granted to this app.
 
 ## Privacy audit
 
-The only release runtime dependency is Kotlin's standard library (plus its JetBrains annotations metadata); there are no AndroidX or service SDK dependencies. The app declares no `<uses-permission>` entries. In particular, it has no Internet, Contacts, call-log, phone-state, or SMS access. Blocked calls use Android's normal call-log and notification behavior.
+The only release runtime dependency is Kotlin's standard library (plus its JetBrains annotations metadata); there are no AndroidX or service SDK dependencies. The sole `<uses-permission>` entry is `POST_NOTIFICATIONS`, which is required on modern Android to show the blocked-number notification and can be denied without affecting call blocking. The app has no Internet, Contacts, call-log, phone-state, or SMS access. Blocked calls continue to use Android's normal call-log behavior.
