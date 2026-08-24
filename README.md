@@ -63,3 +63,9 @@ In **Settings > Apps > Non-Contact Call Blocker > Permissions**, verify that Not
 ## Privacy audit
 
 The only release runtime dependency is Kotlin's standard library (plus its JetBrains annotations metadata); there are no AndroidX or service SDK dependencies. The sole `<uses-permission>` entry is `POST_NOTIFICATIONS`, which is required on modern Android to show the blocked-number notification and can be denied without affecting call blocking. The app has no Internet, Contacts, call-log, phone-state, or SMS access. Blocked calls continue to use Android's normal call-log behavior.
+
+## License
+
+Copyright © 2026 Francisco de Gouveia.
+
+This project is free software licensed under the [GNU General Public License](LICENSE), version 3 or (at your option) any later version (`GPL-3.0-or-later`). It comes with no warranty, to the extent permitted by law.
